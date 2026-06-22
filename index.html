@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imam Nurhidayat | COO · CMo · Business Strategist</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --accent-glow: #e9456033;
+            --gold: #f5a623;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --gradient-2: linear-gradient(135deg, #e94560 0%, #f5a623 100%);
+            --gradient-3: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* ── Background Animation ── */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-animation .orb:nth-child(1) {
+            width: 600px; height: 600px;
+            background: var(--accent);
+            top: -200px; right: -200px;
+            animation-delay: 0s;
+        }
+
+        .bg-animation .orb:nth-child(2) {
+            width: 400px; height: 400px;
+            background: var(--gold);
+            bottom: -100px; left: -100px;
+            animation-delay: -7s;
+        }
+
+        .bg-animation .orb:nth-child(3) {
+            width: 300px; height: 300px;
+            background: #0f3460;
+            top: 50%; left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(40px, 40px) scale(1.05); }
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 12px 50px;
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--gradient-2);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(233, 69, 96, 0.5);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px; height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* ── Hero Section ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 50px 80px;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-badge .dot {
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .hero h1 .highlight {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-weight: 400;
+            max-width: 500px;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            max-width: 520px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--gradient-2);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.35);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-card {
+            width: 100%;
+            max-width: 440px;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--gradient-2);
+        }
+
+        .hero-card-avatar {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        .hero-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+
+        .hero-card .card-role {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-item {
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-item .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.7rem;
+            color: var(--gray);
+            margin-top: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-card-industries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .industry-tag {
+            padding: 6px 14px;
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid rgba(233, 69, 96, 0.25);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: floatBadge 6s infinite ease-in-out;
+        }
+
+        .floating-badge:nth-child(2) {
+            top: 20px; right: -30px;
+            animation-delay: 0s;
+        }
+
+        .floating-badge:nth-child(3) {
+            bottom: 40px; left: -40px;
+            animation-delay: -3s;
+        }
+
+        .floating-badge .badge-icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .floating-badge .badge-icon.red {
+            background: rgba(233, 69, 96, 0.2);
+        }
+
+        .floating-badge .badge-icon.gold {
+            background: rgba(245, 166, 35, 0.2);
+        }
+
+        .floating-badge .badge-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .floating-badge .badge-sub {
+            font-size: 0.65rem;
+            color: var(--gray);
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ── Section Styling ── */
+        section {
+            padding: 100px 50px;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* ── About Section ── */
+        .about {
+            background: var(--gradient-3);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .about-text p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .about-text .tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .core-competencies {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .competency-item {
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .competency-item:hover {
+            background: rgba(233, 69, 96, 0.05);
+            border-color: rgba(233, 69, 96, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .competency-item .comp-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .competency-item h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .competency-item p {
+            font-size: 0.8rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ── Experience / Timeline ── */
+        .experience {
+            background: var(--primary);
+        }
+
+        .timeline {
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--gold), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 40px);
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 40px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 14px; height: 14px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.3);
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 25px 30px;
+            max-width: 480px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            background: rgba(233, 69, 96, 0.05);
+            border-color: rgba(233, 69, 96, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .timeline-year {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .timeline-content .company {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ── Services Section ── */
+        .services {
+            background: var(--gradient-3);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            padding: 35px 30px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            background: rgba(233, 69, 96, 0.05);
+            border-color: rgba(233, 69, 96, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 50px; height: 50px;
+            background: rgba(233, 69, 96, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ── Pricing Section ── */
+        .pricing {
+            background: var(--primary);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            padding: 35px 30px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.featured {
+            background: rgba(233, 69, 96, 0.05);
+            border-color: rgba(233, 69, 96, 0.3);
+            transform: scale(1.03);
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.15);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.03) translateY(-5px);
+        }
+
+        .pricing-popular {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 20px;
+            background: var(--gradient-2);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .pricing-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price span {
+            font-size: 1.8rem;
+        }
+
+        .pricing-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 25px;
+            flex: 1;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .pricing-extra {
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        .pricing-extra h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .extra-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .extra-item {
+            padding: 18px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .extra-item strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .extra-item span {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* ── Industries Section ── */
+        .industries {
+            background: var(--primary);
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .industry-card {
+            padding: 40px 30px;
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .industry-card:hover {
+            background: rgba(233, 69, 96, 0.05);
+            border-color: rgba(233, 69, 96, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .industry-card .industry-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .industry-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .industry-card p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ── CTA Section ── */
+        .cta {
+            background: var(--gradient-1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at center, rgba(233, 69, 96, 0.08) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta .section-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        .contact-item a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        /* ── Footer ── */
+        footer {
+            padding: 30px 50px;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        footer span {
+            color: var(--accent);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                text-align: center;
+            }
+
+            .hero h1 { font-size: 3rem; }
+            .hero-subtitle { margin: 0 auto 30px; }
+            .hero-description { margin: 0 auto 40px; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { order: -1; }
+            .hero-card { margin: 0 auto; }
+
+            .floating-badge:nth-child(2) { right: 10px; }
+            .floating-badge:nth-child(3) { left: 10px; }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .industries-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-card.featured { transform: scale(1); }
+            .pricing-card.featured:hover { transform: translateY(-5px); }
+            .extra-grid { grid-template-columns: 1fr; }
+
+            .timeline::before { left: 20px; }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+            .timeline-dot { left: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 25px; }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100vh;
+                background: rgba(26, 26, 46, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { font-size: 1.2rem; }
+            .menu-toggle { display: flex; }
+            .nav-cta { display: none; }
+
+            .hero { padding: 100px 25px 60px; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1rem; }
+
+            section { padding: 70px 25px; }
+            .section-title { font-size: 2rem; }
+            .cta h2 { font-size: 2rem; }
+
+            .services-grid,
+            .industries-grid,
+            .pricing-grid { grid-template-columns: 1fr; }
+            .extra-grid { grid-template-columns: 1fr; }
+            .core-competencies { grid-template-columns: 1fr; }
+
+            .hero-card { padding: 25px; }
+            .hero-card-stats { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ── Scroll Animations ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">Imam<span>.</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+            <li><a href="#services" onclick="closeMenu()">Services</a></li>
+            <li><a href="#pricing" onclick="closeMenu()">Pricing</a></li>
+            <li><a href="#industries" onclick="closeMenu()">Industries</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+        <a href="mailto:imam.salesbooster@gmail.com" class="nav-cta">Let's Talk</a>
+        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <div class="dot"></div>
+                    Available for Strategic Collaboration
+                </div>
+                <h1>Scaling Businesses<br>From the <span class="highlight">Inside Out</span></h1>
+                <p class="hero-subtitle">Strong Operations. Winning Sales. Sustainable Growth.</p>
+                <p class="hero-description">
+                    Seasoned executive with 8+ years driving market growth across F&B, retail skincare, and Muslim fashion. I bridge strategic vision with operational reality.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">
+                        ✉️ Let's Connect
+                    </a>
+                    <a href="#services" class="btn-secondary">
+                        → View Services
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-avatar">IN</div>
+                    <h3>Imam Nurhidayat</h3>
+                    <div class="card-role">COO · CMO · Business Strategist</div>
+                    <div class="hero-card-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Industries</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Leadership Roles</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">∞</div>
+                            <div class="stat-label">Growth Mindset</div>
+                        </div>
+                    </div>
+                    <div class="hero-card-industries">
+                        <span class="industry-tag">🍽️ F&B</span>
+                        <span class="industry-tag">💄 Skincare</span>
+                        <span class="industry-tag">👗 Muslim Fashion</span>
+                        <span class="industry-tag">🏪 Retail</span>
+                    </div>
+                </div>
+                <div class="floating-badge">
+                    <div class="badge-icon red">📈</div>
+                    <div>
+                        <div class="badge-text">Revenue Growth</div>
+                        <div class="badge-sub">Proven Track Record</div>
+                    </div>
+                </div>
+                <div class="floating-badge">
+                    <div class="badge-icon gold">🏆</div>
+                    <div>
+                        <div class="badge-text">Executive Leader</div>
+                        <div class="badge-sub">COO · CMO · Director</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="section-label">// About Me</div>
+            <h2 class="section-title">Bridging Strategy<br>& Operations</h2>
+            <p class="section-subtitle">
+                I don't just plan. I execute. I don't just strategize. I deliver results.
+            </p>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p class="tagline">"Scaling businesses from the inside out: Strong operations, winning sales."</p>
+                    <p>
+                        I am a seasoned executive with extensive experience serving as Chief Marketing Officer (CMO), Chief Operating Officer (COO), and Director of New Business Development & Brand Strategy.
+                    </p>
+                    <p>
+                        My expertise lies in bridging strategic vision with operational reality to drive sustainable market growth, particularly within the F&B, retail skincare, and Muslim fashion industries.
+                    </p>
+                    <p>
+                        I specialize in offline management, high-level project coordination, team optimization, and crafting sales strategies that seal the deal. I am passionate about elevating brands from the ground up, streamlining complex operations, and leading cross-functional teams to consistently exceed company goals.
+                    </p>
+                </div>
+                <div class="core-competencies reveal">
+                    <div class="competency-item">
+                        <div class="comp-icon">⚙️</div>
+                        <h4>Operations Management</h4>
+                        <p>Streamlining complex operations for efficiency and scalability</p>
+                    </div>
+                    <div class="competency-item">
+                        <div class="comp-icon">📊</div>
+                        <h4>Sales Strategy</h4>
+                        <p>Crafting data-driven sales strategies that convert</p>
+                    </div>
+                    <div class="competency-item">
+                        <div class="comp-icon">👥</div>
+                        <h4>Team Optimization</h4>
+                        <p>Building and leading high-performance cross-functional teams</p>
+                    </div>
+                    <div class="competency-item">
+                        <div class="comp-icon">🚀</div>
+                        <h4>Business Expansion</h4>
+                        <p>From market entry to multi-location scaling</p>
+                    </div>
+                    <div class="competency-item">
+                        <div class="comp-icon">🎯</div>
+                        <h4>Brand Strategy</h4>
+                        <p>Positioning brands for sustainable market growth</p>
+                    </div>
+                    <div class="competency-item">
+                        <div class="comp-icon">🏗️</div>
+                        <h4>Project Coordination</h4>
+                        <p>End-to-end execution of complex business projects</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="section-container">
+            <div class="section-label">// Career Journey</div>
+            <h2 class="section-title">Executive<br>Milestones</h2>
+            <p class="section-subtitle">
+                A track record of leadership across industries — from national brands to strategic projects.
+            </p>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025 — Present</div>
+                        <h3>Strategic Collaborator</h3>
+                        <div class="company">Line Up & DAsset Projects</div>
+                        <p>Leading strategic initiatives and business development for high-impact projects, driving growth and operational excellence.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <h3>Chief Operating Officer (COO)</h3>
+                        <div class="company">National Muslim Fashion Brand</div>
+                        <p>Spearheaded end-to-end operations for a leading national brand — from production, supply chain, to omni-channel distribution and team leadership.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2022</div>
+                        <h3>Chief Marketing Officer (CMO)</h3>
+                        <div class="company">Tsabita Bakery</div>
+                        <p>Led brand strategy, marketing campaigns, and sales growth for a premium bakery brand. Drove market positioning and customer acquisition.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020 — 2021</div>
+                        <h3>Team Consultant</h3>
+                        <div class="company">PYI Rebranding · Kobar Kafe · AOS Project</div>
+                        <p>Multi-project consulting: led rebranding for Panti Yatim Indonesia, setup Kobar Kafe from scratch, and managed the AOS project end-to-end.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2018 — 2019</div>
+                        <h3>Support & HR Manager</h3>
+                        <div class="company">Soto Sedap Boyolali (National Culinary Brand)</div>
+                        <p>Managed HR operations and business support functions for a national culinary chain. Streamlined processes across multiple locations.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2017</div>
+                        <h3>Senior Manager</h3>
+                        <div class="company">Ethica Fashion</div>
+                        <p>Led key operational and business development initiatives for a growing fashion brand. Built foundational processes for scale.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-container">
+            <div class="section-label">// What I Do</div>
+            <h2 class="section-title">How I Can<br>Help Your Business</h2>
+            <p class="section-subtitle">
+                Strategic consulting and hands-on execution — tailored to your business stage and goals.
+            </p>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Operational Optimization</h3>
+                    <p>Streamline your operations for efficiency, cost reduction, and scalability. From SOP development to supply chain management.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">📈</div>
+                    <h3>Sales Strategy & Growth</h3>
+                    <p>Design and implement sales strategies that align with your brand positioning and drive measurable revenue growth.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🚀</div>
+                    <h3>Business Expansion</h3>
+                    <p>From market research to execution — I help businesses expand into new markets, channels, and locations with confidence.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🎯</div>
+                    <h3>Brand Strategy & Positioning</h3>
+                    <p>Define your brand's unique position in the market and build a strategy that resonates with your target audience.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">👥</div>
+                    <h3>Team Building & Leadership</h3>
+                    <p>Build high-performance teams with clear roles, accountability, and a culture of excellence.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🏗️</div>
+                    <h3>New Business Setup</h3>
+                    <p>From concept to launch — I help entrepreneurs and companies set up new business ventures with solid foundations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-container">
+            <div class="section-label">// Pricing</div>
+            <h2 class="section-title">Paket Konsultasi<br>& Layanan</h2>
+            <p class="section-subtitle">
+                Pilih paket yang sesuai kebutuhan bisnis Anda. Semua paket include follow-up session.
+            </p>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <div class="pricing-header">
+                        <div class="pricing-name">🥉 Starter</div>
+                        <div class="pricing-price">Rp<span>2.5</span>jt</div>
+                        <div class="pricing-desc">Untuk UMKM yang mulai butuh arahan</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ 2 sesi konsultasi (60 menit/sesi)</li>
+                        <li>✅ Audit operasional / sales strategy</li>
+                        <li>✅ Action plan document</li>
+                        <li>✅ 14 hari follow-up via email</li>
+                        <li>❌ Tidak include implementasi</li>
+                    </ul>
+                    <a href="#contact" class="btn-secondary" style="width:100%;justify-content:center;text-align:center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <div class="pricing-popular">PALING POPULER</div>
+                    <div class="pricing-header">
+                        <div class="pricing-name">🥈 Growth</div>
+                        <div class="pricing-price">Rp<span>7.5</span>jt</div>
+                        <div class="pricing-desc">Untuk bisnis yang siap scale up</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ 4 sesi konsultasi (60 menit/sesi)</li>
+                        <li>✅ SOP document & workflow</li>
+                        <li>✅ Sales strategy framework</li>
+                        <li>✅ 30 hari follow-up via email/chat</li>
+                        <li>✅ 1x review implementasi</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;text-align:center;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card reveal">
+                    <div class="pricing-header">
+                        <div class="pricing-name">🥇 Scale</div>
+                        <div class="pricing-price">Rp<span>15</span>jt<span style="font-size:0.4em;font-weight:500;">+</span></div>
+                        <div class="pricing-desc">Full project partnership</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ 8-12 minggu dedicated engagement</li>
+                        <li>✅ End-to-end project management</li>
+                        <li>✅ SOP, hiring, supplier setup</li>
+                        <li>✅ Unlimited follow-up selama project</li>
+                        <li>✅ Post-project support 30 hari</li>
+                    </ul>
+                    <a href="#contact" class="btn-secondary" style="width:100%;justify-content:center;text-align:center;">Diskusikan</a>
+                </div>
+            </div>
+            <div class="pricing-extra reveal">
+                <h3>💼 Layanan Tambahan</h3>
+                <div class="extra-grid">
+                    <div class="extra-item">
+                        <strong>Fractional COO</strong>
+                        <span>Operational partner paruh waktu — Rp5-15jt/bulan</span>
+                    </div>
+                    <div class="extra-item">
+                        <strong>Brand Strategy & Rebranding</strong>
+                        <span>Positioning, visual direction, go-to-market — Rp5-20jt</span>
+                    </div>
+                    <div class="extra-item">
+                        <strong>Business Expansion</strong>
+                        <span>Market research, lokasi, SOP outlet baru — Rp5-15jt</span>
+                    </div>
+                    <div class="extra-item">
+                        <strong>Team Building Workshop</strong>
+                        <span>Half-day / full-day pelatihan tim — Rp3-10jt</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries" id="industries">
+        <div class="section-container">
+            <div class="section-label">// Expertise</div>
+            <h2 class="section-title">Industries<br>I've Mastered</h2>
+            <p class="section-subtitle">
+                Deep operational and strategic experience across these key sectors.
+            </p>
+            <div class="industries-grid">
+                <div class="industry-card reveal">
+                    <div class="industry-icon">🍽️</div>
+                    <h3>Food & Beverage</h3>
+                    <p>From bakery chains to national culinary brands — production, distribution, and multi-location operations.</p>
+                </div>
+                <div class="industry-card reveal">
+                    <div class="industry-icon">💄</div>
+                    <h3>Retail Skincare</h3>
+                    <p>Brand positioning, retail operations, and customer acquisition in the competitive beauty industry.</p>
+                </div>
+                <div class="industry-card reveal">
+                    <div class="industry-icon">👗</div>
+                    <h3>Muslim Fashion</h3>
+                    <p>End-to-end operations for fashion brands — from design and production to omni-channel retail.</p>
+                </div>
+                <div class="industry-card reveal">
+                    <div class="industry-icon">🏪</div>
+                    <h3>Retail & FMCG</h3>
+                    <p>Store operations, inventory management, and scaling retail presence across multiple channels.</p>
+                </div>
+                <div class="industry-card reveal">
+                    <div class="industry-icon">☕</div>
+                    <h3>Café & Hospitality</h3>
+                    <p>Setup and operations management for café and hospitality ventures — from concept to daily operations.</p>
+                </div>
+                <div class="industry-card reveal">
+                    <div class="industry-icon">🤝</div>
+                    <h3>Strategic Consulting</h3>
+                    <p>Cross-industry consulting for organizations seeking operational excellence and growth strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact Section -->
+    <section class="cta" id="contact">
+        <div class="section-container">
+            <div class="section-label">// Let's Connect</div>
+            <h2>Ready to Scale<br>Your Business?</h2>
+            <p>
+                Whether you need strategic guidance, operational support, or a trusted partner for your next big move — let's talk.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:imam.salesbooster@gmail.com" class="btn-primary">
+                    ✉️ Send Email
+                </a>
+                <a href="https://www.linkedin.com/in/imamnurh" target="_blank" class="btn-secondary">
+                    🔗 LinkedIn Profile
+                </a>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    📧 <a href="mailto:imam.salesbooster@gmail.com">imam.salesbooster@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    🔗 <a href="https://www.linkedin.com/in/imamnurh" target="_blank">linkedin.com/in/imamnurh</a>
+                </div>
+                <div class="contact-item">
+                    📍 Indonesia
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 <span>Imam Nurhidayat</span> — COO · CMO · Business Strategist. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 100;
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
