@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alur Otomasi AI Agent — Kelas Mentor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; padding: 40px 20px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 8px; }
+  h1 span { color: #f97316; }
+  .subtitle { text-align: center; color: #8b949e; margin-bottom: 50px; font-size: 0.95rem; }
+
+  .flow-section { margin-bottom: 50px; }
+  .section-title { font-size: 1.1rem; font-weight: 700; color: #f97316; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .section-num { background: #f97316; color: #000; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; }
+
+  .pipeline { display: flex; flex-direction: column; gap: 12px; }
+  .step {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 14px; padding: 20px 24px;
+    transition: all 0.3s ease;
+  }
+  .step:hover { border-color: #f97316; background: #1c2333; transform: translateX(4px); }
+  .step-icon { font-size: 1.6rem; min-width: 40px; text-align: center; padding-top: 2px; }
+  .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .step-content p { font-size: 0.85rem; color: #8b949e; line-height: 1.6; }
+  .step-content .tag { display: inline-block; padding: 2px 10px; background: rgba(249,115,22,0.15); color: #f97316; border-radius: 50px; font-size: 0.7rem; font-weight: 600; margin-top: 6px; }
+
+  .arrow { text-align: center; color: #f97316; font-size: 1.2rem; padding: 4px 0; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card {
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 14px; padding: 20px;
+    transition: all 0.3s ease;
+  }
+  .card:hover { border-color: #f97316; }
+  .card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .card ul { list-style: none; }
+  .card li { font-size: 0.82rem; color: #8b949e; padding: 4px 0; display: flex; align-items: flex-start; gap: 6px; }
+  .card li::before { content: '•'; color: #f97316; font-weight: 700; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(249,115,22,0.03) 100%);
+    border: 1px solid rgba(249,115,22,0.3); border-radius: 16px;
+    padding: 24px; margin-bottom: 30px;
+  }
+  .highlight-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: #f97316; }
+  .highlight-box p { font-size: 0.88rem; color: #8b949e; line-height: 1.7; }
+
+  .timeline-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .timeline-table th { text-align: left; font-size: 0.78rem; color: #f97316; font-weight: 700; padding: 10px 14px; border-bottom: 1px solid #30363d; }
+  .timeline-table td { padding: 10px 14px; font-size: 0.85rem; color: #c9d1d9; border-bottom: 1px solid #21262d; }
+  .timeline-table tr:hover td { background: #1c2333; }
+  .badge-green { background: rgba(46,160,67,0.15); color: #3fb950; padding: 2px 8px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; }
+  .badge-orange { background: rgba(249,115,22,0.15); color: #f97316; padding: 2px 8px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; }
+  .badge-red { background: rgba(248,81,73,0.15); color: #f85149; padding: 2px 8px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; }
+
+  .phase-bar { display: flex; gap: 8px; margin-top: 16px; }
+  .phase { flex: 1; padding: 10px 14px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; text-align: center; }
+  .phase.active { border-color: #f97316; background: rgba(249,115,22,0.08); }
+  .phase small { display: block; color: #8b949e; font-size: 0.68rem; margin-top: 2px; }
+  .phase .ph-title { font-size: 0.82rem; font-weight: 700; }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>AI Agent <span>&</span> Otomasi Bisnis</h1>
+<p class="subtitle">Kelas Mentor — Dari Lead Masuk Sampai Barang Dikirim</p>
+
+<!-- HIGHLIGHT VISI -->
+<div class="highlight-box">
+  <h3>🎯 Visi Sistem</h3>
+  <p>Setiap pekerjaan yang alurnya jelas bisa diotomasi oleh AI Agent. Mas Imam & tim fokus ke hal yang butuh keputusan manusia — AI Agent yang handle yang berulang & monitoring.</p>
+  <div class="phase-bar">
+    <div class="phase active"><div class="ph-title">Phase 1</div><small>Foundation</small></div>
+    <div class="phase"><div class="ph-title">Phase 2</div><small>Automation</small></div>
+    <div class="phase"><div class="ph-title">Phase 3</div><small>Full AI Agent</small></div>
+  </div>
+</div>
+
+<!-- ALUR UTAMA -->
+<div class="flow-section">
+  <div class="section-title"><div class="section-num">1</div> Alur Utama — Dari Iklan Sampai Dikirim</div>
+  <div class="pipeline">
+    <div class="step">
+      <div class="step-icon">📢</div>
+      <div class="step-content">
+        <h3>Calon Pembeli Lihat Iklan</h3>
+        <p>Meta Ads / Google Ads → Landing Page. Saat klik, data masuk ke sistem.</p>
+        <span class="tag">Meta Ads · Google Ads · Organic</span>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">💬</div>
+      <div class="step-content">
+        <h3>Lead Masuk — Chat WA / Form LP</h3>
+        <p>AI Agent balas otomatis, tanya kebutuhan, catat data CRM, kirim link produk.</p>
+        <span class="tag">WA 0812-9665-6851 · Landing Page Form</span>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">🔍</div>
+      <div class="step-content">
+        <h3>Profiling & Kualifikasi</h3>
+        <p>AI Agent menilai: Cold / Warm / Hot. Update status di CRM. Kirim info yang relevan.</p>
+        <span class="tag">Cold → Edukasi · Warm → Detail · Hot → Payment</span>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">📲</div>
+      <div class="step-content">
+        <h3>Follow-Up Sequence</h3>
+        <p>Otomatis follow-up di H+2, H+5, H+7, H+14, H+30. Testimoni, promo, penawaran.</p>
+        <span class="tag">WA · Telegram</span>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">💳</div>
+      <div class="step-content">
+        <h3>Closing & Pembayaran</h3>
+        <p>Kirim link BSI 7190166168. Konfirmasi bayar. Kirim akses produk / teruskan order.</p>
+        <span class="tag">BSI · Payment Gateway</span>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">📦</div>
+      <div class="step-content">
+        <h3>Pengiriman & Resi</h3>
+        <p>Order → Tim packing → Kirim → Input resi → AI Agent forward resi ke pelanggan.</p>
+        <span class="tag">Internal WA · Tracking</span>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">⭐</div>
+      <div class="step-content">
+        <h3>Feedback & Retensi</h3>
+        <p>7 hari setelah terima → minta feedback. Testimoni → social proof. 30 hari → cross-sell.</p>
+        <span class="tag">NPS · Testimoni · Upsell</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOLLOW-UP TIMELINE -->
+<div class="flow-section">
+  <div class="section-title"><div class="section-num">2</div> Follow-Up Timeline</div>
+  <table class="timeline-table">
+    <thead>
+      <tr><th>Hari</th><th>Action</th><th>Channel</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0 (saat chat)</td><td>Balas pertanyaan + info produk</td><td>WA</td><td><span class="badge-green">Auto</span></td></tr>
+      <tr><td>H+2</td><td>Cek status → kirim testimoni</td><td>WA</td><td><span class="badge-green">Auto</span></td></tr>
+      <tr><td>H+5</td><td>Penawaran spesial / diskon</td><td>WA</td><td><span class="badge-orange">Review</span></td></tr>
+      <tr><td>H+7</td><td>Follow-up terakhir</td><td>WA</td><td><span class="badge-green">Auto</span></td></tr>
+      <tr><td>H+14</td><td>Nurturing — konten edukasi</td><td>Telegram</td><td><span class="badge-green">Auto</span></td></tr>
+      <tr><td>H+30</td><td>Re-engagement — promo baru</td><td>WA</td><td><span class="badge-orange">Review</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ROLE AI AGENT -->
+<div class="flow-section">
+  <div class="section-title"><div class="section-num">3</div> Peran AI Agent</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>✅ AI Agent BISA</h4>
+      <ul>
+        <li>Balas chat awal & pertanyaan umum</li>
+        <li>Catat lead & profiling cold/warm/hot</li>
+        <li>Follow-up otomatis by sequence</li>
+        <li>Kirim notifikasi internal ("Ada order baru")</li>
+        <li>Monitor order yang belum diproses</li>
+        <li>Forward resi ke pelanggan</li>
+        <li>Buat rekap laporan mingguan</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>❌ Perlu MANUSIA</h4>
+      <ul>
+        <li>Transfer dana & kelola keuangan</li>
+        <li>Ubah harga / diskon signifikan</li>
+        <li>Kirim pesan massal tanpa review</li>
+        <li>Keputusan strategis bisnis</li>
+        <li>Handle komplain escalation tinggi</li>
+        <li>Konten & copywriting utama</li>
+        <li>Pengawasan & audit hasil kerja AI</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SKENARIO PESAN INTERNAL -->
+<div class="flow-section">
+  <div class="section-title"><div class="section-num">4</div> Notifikasi Internal ke Mas Imam</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>🆕 Order Baru</h4>
+      <ul>
+        <li>"Order dari [Nama], [Produk], Rp [X]"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>⚠️ Order Pending</h4>
+      <ul>
+        <li>"Order [Nama] belum diproses 1 hari"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📦 Stok Menipis</h4>
+      <ul>
+        <li>"Stok [Produk] tinggal [X] pcs"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🔥 Lead Hot</h4>
+      <ul>
+        <li>"Lead [Nama] HOT, 3 hari tidak di-follow"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>😟 Komplain</h4>
+      <ul>
+        <li>"Komplain dari [Nama]: [Detail]"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📊 Mingguan</h4>
+      <ul>
+        <li>"Minggu [X]: Y lead, Z closing, [Rp]"</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ARSITEKTUR -->
+<div class="flow-section">
+  <div class="section-title"><div class="section-num">5</div> Arsitektur Integrasi</div>
+  <div class="pipeline">
+    <div class="step">
+      <div class="step-icon">📢</div>
+      <div class="step-content">
+        <h3>Akuisisi Lead</h3>
+        <p>Meta Ads, Google Ads, Organic Search → Landing Page / WA</p>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">🤖</div>
+      <div class="step-content">
+        <h3>AI Agent Hub</h3>
+        <p>Menerima semua lead, profiling, follow-up, monitoring, reporting</p>
+        <span class="tag">WA · Telegram · Email</span>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">🗄️</div>
+      <div class="step-content">
+        <h3>Database & CRM</h3>
+        <p>Notion / Google Sheets — semua data lead, order, status tersimpan</p>
+      </div>
+    </div>
+    <div class="arrow">⬇️</div>
+    <div class="step">
+      <div class="step-icon">👥</div>
+      <div class="step-content">
+        <h3>Tim Operasional</h3>
+        <p>Notifikasi internal → Packing → Kirim → Resi → Admin → CS</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI -->
+<div class="flow-section">
+  <div class="section-title"><div class="section-num">6</div> KPI & Target</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>⚡ Response</h4>
+      <ul>
+        <li>Chat response: <b>&lt; 10 min</b></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📈 Conversion</h4>
+      <ul>
+        <li>LP → Chat: <b>&gt; 30%</b></li>
+        <li>Chat → Order: <b>&gt; 15%</b></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>⭐ Fulfillment</h4>
+      <ul>
+        <li>Order process: <b>&lt; 2 hari</b></li>
+        <li>Satisfaction: <b>&gt; 4.5/5</b></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<p style="text-align:center; color:#484f58; margin-top:50px; font-size:0.8rem;">
+  Kelas Mentor — SOP AI Agent & Otomasi Bisnis v1.0 · 2026-06-23
+</p>
+
+</div>
+</body>
+</html>
